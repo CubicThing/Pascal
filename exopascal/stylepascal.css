@@ -1,0 +1,51 @@
+/*Name: Theme Äscam
+ *Theme URL; pascaltheme.com
+ *Auteur: Adrian Wahler
+ *DEscription:Theme CSS site web exo Pascal
+ *Version:1.0
+ *License:Ludus1B
+ *License URL:Ludus1b.com
+ *Text Domain:Ludus1B
+ */
+
+@font-face{
+        font-family: 'cantarell';
+        src:url(cantarell/Cantarell-Regular.ttf);
+}
+ 
+body{
+    font-family: 'cantarell';
+    background-color: gray;
+    background-image: url(images/pascal.jpg);
+}
+
+div{
+        float: left;
+}
+
+ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: white;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    border: solid;
+}
+
+section{
+        float: right;
+        background-color: white;
+        margin: auto;
+        width : 60%;
+        border: solid;
+        padding: 3em;
+        overflow: auto;
+}
+
+.element img{
+        width: 100%;
+        height: auto;
+}

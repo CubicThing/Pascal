@@ -1,0 +1,338 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+     <title>Cours Pascal</title>
+     <link rel="stylesheet" type="text/css" href="stylepascal.css">
+    </head>
+    
+    <body>
+        <div>
+    <ul>
+        <li><div class="element"><img src="image/psclogo.jpg"/></div></li>
+        <li><a href="#structure"> Structure </a></li>
+        <li><a href="#variable"> Variables </a></li>
+        <li><a href="#constante"> Constantes </a></li>
+        <li><a href="#entree"> Entree/Sorties </a></li>
+        <li><a href="#fonction"> Fonctions PASCAL </a></li>
+        <li><a href="#boucle"> Boucles et conditions </a></li>
+        <li><a href="#tableau"> Tableaux, types </a></li>
+    </ul>
+    </div>
+    <section>
+        <h1 id="variable"> Variables </h1>
+        <p> Les variables sont similaires aux constantes mais leurs valeurs peuvent changer pendant que le programme fonctionne. Les variables doivent d'abord être déclarées avant de pouvoir être utilisées :
+</br>var</br>
+  IdentifierList1 : DataType1;</br>
+  IdentifierList2 : DataType2;</br>
+  IdentifierList3 : DataType3;</br>
+  ...</br>
+IdentifierList est une série d'identificateurs, séparés par des virgules (,). Tous les identificateurs dans une liste sont déclarés comme étant du même type.</br>
+Les types de donnée de base dans Pascal incluent :</br>
+les entiers (integer) ;</br>
+les réels (real) ;</br>
+les caractères (char) ;</br>
+les booléens (boolean).</br>
+Le Pascal standard ne prévoit pas de type chaine mais les compilateurs modernes le font. Les développeurs Pascal expérimentés utilise aussi des pointeurs pour l'allocation dynamique de mémoire, les objets pour la programmation orientée objet et d'autres choses ; mais vous êtes ici pour débuter.
+</br>Plus d'informations sur les types de données de Pascal :</br>
+</br>Le type integer peut contenir des entiers de -32768 à 32767. C'est une plage signée qui peut être contenue dans un un mot de 16 bits, c'est un héritage de l'époque où les CPU 16 bits étaient communes. En raison de la compatibilité descendante, un entier signé sur 32 bits est un longint et peut manier une plage de valeurs supérieure.
+</br>Le type de donnée real a une plage de 3.4x10-38 à 3.4x1038, en plus de la même plage sur le côté négatif et de 0. Les valeurs réelles sont stockées dans l'ordinateur de manière similaire à la notation scientifique, avec une mantisse et un exposant, avec quelques complications. Dans Pascal, vous pouvez exprimer les valeurs réelles soit en notation à virgule fixe soit en notation scientifique avec le caractère E séparant la mantisse de l'exposant. Ainsi, 452.13 est la même chose que 4.5213e2.
+</br>Le type de donnée char contient les caractères. Assurez-vous de les délimiter par des guillemets, comme ici : 'a' 'B' '+' le Pascal standard utilise des caractères sur 8 bits, non des 16 bits comme Unicode, utilisé pour représenter tous les jeux de caractères dans un système de code unifié, qui n'est pas supporté.
+</br>Le WideChar est un caractère sur 2 octets (un élément du jeu de caractère à double octet) et peut contenir un caractère unicode.</br>
+Free Pascal supporte l'implémentation du type PChar. PChar est défini comme un pointeur vers un type Char, mais permet des opérations supplémentaires. Le type PChar peut être mieux compris comme une chaîne à zéro terminal comme en C, i.e. une variable PChar est un pointeur sur un tableau de type Char qui se termine par un caractère nul (#0). Free Pascal autorise l'initialisation des constantes typées PChar ou l'affectation directe. Par exemple, les morceaux de code suivants sont équivalents :
+program one;</br>
+var P : PChar;</br>
+begin</br>
+  P := 'This is a null-terminated string.';</br>
+  WriteLn (P);</br>
+end.</br>
+program two;</br>
+const P : PChar = 'This is a null-terminated string.';</br>
+begin</br>
+  WriteLn (P);</br>
+end.</br>
+</br>Free Pascal supporte les types String comme définis dans Turbo Pascal : une suite de caractères avec une spécification de taille optionnelle (à la déclaration). Il supporte aussi les AnsiString (de taille illimitée) comme dans Delphi et peuvent être déclarées comme :
+</br>variable_name : string;                    // if no length is given, it defaults to 255
+</br>variable_name : string[length];            // where:  1 < length <= 255
+</br>Le type prédéfini ShortString est défini comme étant une chaîne de taille 255.
+</br>Les AnsiString sont des chaînes de taille illimitée. Elles sont munies du comptage de références et sont garanties à zéro terminal. En interne, une AnsiString est traitée comme un pointeur : le contenu réel de la chaîne est stocké dans le tas, il est alloué autant de mémoire que nécessaire pour stocker son contenu.
+</br>Widestring (utilisé pour représenter des chaînes de caractères unicode) sont implémentées de manière proche des AnsiString : comptage de référence, tableaux à zéro terminal, seulement elles sont implémentées comme des tableaux de WideChar au lieu de Char.
+</br>Le type de donnée boolean ne peut avoir que deux valeurs : TRUE ou FALSE.</p>
+    
+    <h1 id="constante"> Constantes </h1>
+    <p>
+        Dans un programme, il est souvent utile d'avoir des valeurs de référence ou des conditions initiales. Plutot que de réutiliser le même chiffre il est souvent judicieux de le déclarer comme un constante.
+
+</br>Comme son nom l'indique, une constante ne change pas de valeur au cours du programme, une valeur de départ lui est affectée dès sa déclaration avant le code exécutable. C'est l'opérateur égale = qui affecte une valeur à une constante après que cette dernière se soit vue affectée un identificateur par l'utilisation du mot réservé const.
+   </p>
+    
+    <h1 id="entree"> Entrées et sorties</h1>
+    <p>
+        Entrées sorties à l'écran
+
+</br>La commande write permet d'afficher du texte et de laisser le curseur à la fin du texte affiché. Cette commande permet d'afficher des chaînes de caractères d'excédant pas 255 signes ainsi que des valeurs de variables, de constantes, de types... Le texte doit être entre apostrophe. Si le texte à afficher contient une apostrophe, il faut alors la doubler. Les différents noms de variables doivent êtres séparés par des virgules. 
+</br>Note : toute commande doit être suivie d'un point virgule. 
+</br>Syntaxe :
+</br>
+</br>Write ('Texte à afficher', variable1, variable2, 'texte2') ;
+</br>Write ('L''apostrophe se double.') ;
+</br>
+</br>La commande Writeln est semblable à la précédente à la différence près que le curseur est maintenant renvoyé à la ligne suivante. 
+</br>Syntaxe :
+</br>
+</br>Writeln  ('Texte avec renvoi à la ligne') ;
+</br>
+</br>La commande read permet à l'utilisateur de rentrer une valeur qui sera utilisée par le programme. Cette commande ne provoque pas de retour Chariot, c'est-à-dire que le curseur ne passe pas à la ligne. 
+</br>Syntaxe :
+</br>
+</br>Read (variable) ;
+</br>
+</br>La commande ReadLn permet à l'utilisateur de rentrer une valeur qui sera utilisée par le programme. Cette commande provoque le retour Chariot, c'est-à-dire que le curseur passe à la ligne suivante. Lorsqu'aucune variable n'est affectée à la commande, il suffit de presser sur <ENTREE>. 
+</br>Syntaxe :
+</br>
+</br>ReadLn (variable1, variable2) ;
+</br>
+</br>ReadLn ;
+</br>
+</br>Program exemple;
+</br>Var nom : String;
+</br>BEGIN
+</br>
+</br>Write ('Entrez votre nom : ') ;
+</br>ReadLn(nom) ;
+</br>WriteLn('Votre nom est ', nom) ;
+</br>ReadLn ;
+</br>
+</br>END.
+</br>
+</br>Ce programme exemple1 déclare tout d'abord la variable nommée nom comme étant une chaîne de caractère (String). Ensuite, dans le bloc programme principal, il est demandé à l'utilisateur d'affecter une valeur à la variable nom qui est initialisée automatiquement (valeur nulle) à chaque démarrage du programme. Ensuite, il y a affichage de la valeur de la variable et attente que la touche entrée soit validée (ReadLn).
+</br>L'équivalent de la commande ReadLn est ReadKey qui donne une valeur à une variable de type Char (caractère ASCII). 
+</br>Syntaxe :
+</br>
+</br>x := ReadKey ;
+</br>
+</br>Il existe une équivalence à cette commande très utile pour sortir d'une boucle : KeyPressed. 
+</br>Syntaxe :
+</br>
+</br>Repeat
+</br>...
+</br>commandes
+</br>...
+</br>Until KeyPressed ;
+</br>
+</br>Program exemple2 ;
+</br>Uses crt ;
+</br>Var i : integer ;
+</br>Const bornesup=10000 ;
+</br>BEGIN
+</br>
+</br>Repeat
+</br>WriteLn(sqrt(i)) ;
+</br>Inc(i) ;
+</br>Until (i=bornesup) or KeyPressed ;
+</br>
+</br>END.
+</br>
+</br>Ce programme exemple2 répète une boucle jusqu'à qu'une valeur soit atteinte (bornesup) mais s'arrête si on appuie sur une touche. L'instruction Inc(a,n); incrémente la valeur n à la variable a (par défault n vaut 1), cette dernière étant de type integer
+</br>
+</br>Sachez encore que le format (le nombre de signes) d'une variable de type real peut être modifié  lors de son affichage : writeln (nombre : 5 :2) pour afficher le nombre sur 5 chiffres avant la virgule, et 2 chiffres après.
+</br>
+</br>Pour pouvez appliquer ce format pour tous les autres types de variable de manière générale si vous ne stipuler que le nombre d'espace(s) à afficher devant votre texte ou valeur.
+</br>Exemple : WriteLn ( 'Coucou' : 20 ) ; 
+</br> Ici, la chaîne de caractères sera affichée après 20 espaces.
+    </p>
+    <h1 id="fonction"> Fonctions </h1>
+    <p>
+</br>        Les procédures et fonctions sont des sortes de sous-programmes écrits avant le programme principal mais appelés depuis ce programme principal, d'une autre procédure ou même d'une autre fonction. Le nom d'une procédure ou d'une fonction est un identifiant qui ne de doit pas excéder 127 caractères et ne pas contenir d'accent. Ce nom doit, en outre, être différent de celui d'une instruction en Pascal.
+</br> 
+</br> Procedure
+</br> Syntaxe :
+</br> 
+</br> program nom de programme ;
+</br> 
+</br> procedure nom de procédure;  {Déclaration de la procédure}
+</br> begin
+</br> ...
+</br> instructions
+</br> ...
+</br> end;
+</br> 
+</br> begin;  {Début du programme principal}
+</br> ...
+</br> nom de procédure; {appel de la procédure}
+</br> ...
+</br> end.
+</br> 
+</br> Exemple :
+</br> program test;
+</br> 
+</br> procedure AfficheDate;
+</br> begin
+</br> writeln(DateTimeToStr(Now));
+</br> end;
+</br> 
+</br> begin;
+</br> write(‘ Début : ’);AfficheDate;
+</br> writeln(‘ Suite des instuctions ’);
+</br> write(‘ Fin  : ’);AfficheDate;
+</br> end.
+</br> 
+</br> On peut déclarer des variables locales à une procédure ou une fonction. La portée de ces variables sera locale à la procédure ou à la fonction.
+</br> 
+</br> Exemple
+</br> program Dessine_Carre_Chiffres;
+</br> 
+</br> procedure Ligne;   {dessine une ligne de 5 chiffres}
+</br> var i : integer;   {la variable i est locale à la procédure Ligne}
+</br> begin
+</br> for i:=1 to 5 do write(i);
+</br> end;
+</br>
+</br> var i : integer;
+</br> begin
+</br> for i:=1 to 5 do {dessine 5 lignes de 5 chiffres}
+</br>   begin
+</br>     Ligne; writeln;
+</br>   end;
+</br> end.
+</br> 
+</br> Fonction
+</br> Une fonction est une procédure "qui ramène un résultat" d'un type simple qu'on précise dans la déclaration de la fonction.
+</br> Pour "ramener" le résultat, il suffit d'ajouter une ligne où on affecte le résultat au nom de la fonction
+</br> 
+</br> Syntaxe :
+</br> 
+</br> Program nom_de_programme ;
+</br> 
+</br> fonction nom_de_fonction( noms de variables : types ) : type;
+</br> Begin
+</br> ...
+</br> commandes
+</br> nom_de_fonction := résultat
+</br> ...
+</br> End ;
+</br> 
+</br> BEGIN
+</br> variable := nom_de_fonction ( noms d'autres variables ou leurs valeurs ) ;
+</br> END.
+</br> 
+</br> Exemple :
+</br> 
+</br> fonction Maintenant : string;
+</br>  begin
+</br>   Maintenant := DateTimeToString(Nom);
+</br>  end;
+</br> 
+</br> begin
+</br> writeln(Maintenant);
+</br> end.
+</br> 
+</br> Passage de paramètres à une procédure ou une fonction
+</br> On peut passer des paramètres à une procédure ou un fonction sous forme d'une liste de paramètres formels entre parenthèses.
+</br> A l'intérieur du corps de la procédure, les paramètres sont des variables locales. Il ne faut pas redéclarer le nom des paramètres dans la section des déclarations locales
+</br> 
+</br> Exemple :
+</br> 
+</br> function Min (a,b:real) : real;
+</br> begin
+</br> if a < b then Min := a else Min := b;
+</br> end;
+</br> 
+</br> var x1,x2,x3,x4 : real ;
+</br> begin
+</br> x1 :=5; x2:=3.14; x3:=1;x4:=0;
+</br> writeln(Min(Min(x1,x2),Min(x3,x4));
+</br> end.
+</br> 
+</br> C ’est la valeur du paramètre qui est passé à la procédure. Si la valeur est modifiée à l ’intérieur de la procédure, la modification n ’est pas répercutée à la sortie de la procédure.
+</br> 
+</br> Exemple :
+</br> 
+</br> function Puissance (x : real;n:integer) : real;
+</br> var p:real;
+</br> begin
+</br>  p:=1;
+</br>  while n>0 do begin
+</br>   p:= p * x;
+</br>   n:= n - 1;
+</br>  end;
+</br>  Puissance := p; 
+</br> end;
+</br> 
+</br> begin
+</br> n:=3;
+</br> writeln(‘ Pi au cube =‘ ,Puissance(3.14159,n));
+</br> writeln(n);  {la valeur de n n'a pas été modifiée}
+</br> end.
+</br> 
+</br> Passage de paramètre par référence
+</br> 
+</br> Si on souhiate que les modifications apportées dans la procédure soient reportées dans le code appelant, il faut mettre le mot clé var dans le passage de paramètre. C'est alors la référence à la variable (et non pas la valeur de cette variable) qui est passé en paramètre. NB : on ne peut pas passer des constantes dans un passage par référence.
+</br> 
+</br> Exemple :
+</br> 
+</br> procedure echange(var a,b:real)
+</br>  var temp:real;
+</br>   begin
+</br>   temp:=a; a:=b; b:=temp;
+</br>   end;
+</br> 
+</br> var x,y:real;
+</br> begin
+</br>  x:=5;y:=15;echange(x,y);
+</br>  writeln(‘ x: ’,x, ’ y: ’,y)
+</br> end.
+        </p>
+    <h1 id="boucle"> Boucles </h1>
+    <P>
+        </br>Les instructions de boucle (aussi appelé instructions répétitives) en langage Turbo Pascal sont aux nombres de trois, mais permettent quand même de faire face à de nombreuses situations ou presque :
+</br>
+</br>WHILE
+</br>REPEAT ... UNTIL
+</br>FOR
+</br>WHILE
+</br>
+</br>L'instruction «WHILE» permet la comparaison au début de la boucle, avant même que la suite d'instruction inclus dans la boucle ne soit lancé ! On peut voir cette instruction à la manière d'un «IF» se répétant tant et aussi longtemps que la condition est vrai. Voici donc sa syntaxe :
+</br>
+</br>WHILE expression_vrai DO instruction_exécuté_si_vrai
+</br>REPEAT ... UNTIL
+</br>
+</br>L'instruction «REPEAT ... UNTIL» oblige à répéter une boucle jusqu'à ce que la condition soit finalement vrai. Ainsi, tant que la condition est fausse, la boucle est répétée. Ainsi le principe de fonctionnement est simple, on exécute les instructions, on effectue un teste pour vérifier si la condition est fausse, on revient au début et on recommence sinon on poursuit à l'instruction suivante.
+</br>FOR
+</br>
+</br>Avec «Turbo Pascal» l'instruction permettant d'effectuer des compteurs de boucles est «FOR». L'«expression1» permet d'identifier la variable devant être utilisé pour effectuer le compteur de boucle. L'«expression2» est la valeur de départ ou d'initialisation du compteur de boucle. L'«expression3» est la valeur de fin du compteur de boucle.        
+    </P>
+    
+    <h1 id="tableau"> Tableaux </h1>
+    <p>
+</br>        Les tableaux[modifier | modifier le wikicode]
+</br> Un outils particulièrement pratique et proposé dans la grande majorité des langages est le tableau. Il permet le stockage d'une série d'éléments de même type.
+</br> Imaginons un professeur voulant stocker les notes de 5 élèves, il peut ainsi utiliser un tableau d'entiers de longueur 5. Illustrons ce dernier :
+</br> 12	16	07	13	09
+</br> En pascal, un tableau peut être déclaré de la manière suivante :
+</br> var
+</br>     t : array[1..5] of integer;
+</br> Ainsi, ce code déclare un tableau d'entiers, dont les indices vont de 1 à 5. Cet indice permet d'accorder un numéro à chacune des cases et d'y accéder.
+</br> Exemple :
+</br> var
+</br>     t : array[1..5] of integer;
+</br> 
+</br> begin
+</br>     t[1] := 12;
+</br>     t[2] := 16;
+</br>     t[3] := 7;
+</br>     t[4] := 13;
+</br>     t[5] := 9;
+</br> end.
+</br> Voilà comment il est possible d'affecter une valeur à chacune des cases du tableau. L'accès en lecture se fait par la même notation.
+    </p>
+    
+    </section>
+    
+    
+    
+    </body>
+    
+    <footer>
+        
+        
+    </footer>
